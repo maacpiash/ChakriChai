@@ -1,0 +1,45 @@
+﻿@page
+@model Cefalog.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Story</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Story.StoryID" />
+            <div class="form-group">
+                <label asp-for="Story.Title" class="control-label"></label>
+                <input asp-for="Story.Title" class="form-control" />
+                <span asp-validation-for="Story.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Story.Body" class="control-label"></label>
+                <textarea asp-for="Story.Body" class="form-control"></textarea>
+                <span asp-validation-for="Story.Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Story.PostedOn" class="control-label"></label>
+                @Html.TextBoxFor(model => model.Story.PostedOn, new { @type = "date", @class = "form-control datepicker", @Value = Model.Story.PostedOn.ToString("yyyy-MM-dd") })
+                <span asp-validation-for="Story.PostedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

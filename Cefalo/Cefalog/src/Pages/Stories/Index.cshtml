@@ -1,0 +1,78 @@
+﻿@page
+@model Cefalog.IndexModel
+
+
+@inject SignInManager<Cefalog.Models.User> SignInManager
+@inject UserManager<Cefalog.Models.User> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
+@foreach (var item in Model.Stories)
+{
+    <h3>@item.Title</h3>
+    <p>Posted by <strong>@Model.AuthorNames[item.AuthorID]</strong> on <strong>@item.PostedOn.ToShortDateString()</strong></p>
+    <p>@item.Body</p>
+    <table>
+        <tr>
+            <td><a asp-page="./Details" asp-route-id="@item.StoryID">View</a></td>
+            <br />
+            @if (item.AuthorID == @UserManager.GetUserName(User))
+            {
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.StoryID">Edit</a> |
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.StoryID">Delete</a>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>
+                View as:
+            </td>
+
+            <td>
+                <a asp-page="./ViewXML" asp-route-id="@item.StoryID">XML</a> |
+            </td>
+            <td>
+                <a asp-page="./ViewJSON" asp-route-id="@item.StoryID">JSON</a>
+            </td>
+        </tr>
+    </table>
+}
+    
+
+@{
+    var prevDisabled = !Model.Stories.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Stories.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Stories.PageIndex - 1)"
+   asp-route-Filter="@Model.CurrentFilter"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Stories.PageIndex + 1)"
+   asp-route-Filter="@Model.CurrentFilter"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
