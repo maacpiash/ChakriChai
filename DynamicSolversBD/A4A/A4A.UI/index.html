@@ -1,0 +1,394 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        var req = new XMLHttpRequest();
+        req.overrideMimeType("application/json");
+        req.open("GET", "https://localhost:5001/api/BusinessAgents", true);
+        req.onreadystatechange = function()
+        {
+            var myArr = JSON.parse(req.responseText);
+            var whattoadd = "<tbody>";
+            $.each(myArr, function(i, item)
+            {
+                whattoadd += '<tr>';
+                whattoadd += '<td>' + item.businessId + '</td>';
+                whattoadd += '<td>' + item.code + '</td>';
+                whattoadd += '<td>' + item.email + '</td>';
+                whattoadd += '<td>' + item.name + '</td>';
+
+                whattoadd += '<td>' + item.street + '</td>';
+                whattoadd += '<td>' + item.city + '</td>';
+                whattoadd += '<td>' + item.state + '</td>';
+                whattoadd += '<td>' + item.zip + '</td>';
+                whattoadd += '<td>' + item.country + '</td>';
+
+                whattoadd += '<td>' + item.mobile + '</td>';
+                whattoadd += '<td>' + item.phone + '</td>';
+                whattoadd += '<td>' + item.contactPerson + '</td>';
+                whattoadd += '<td>' + item.referredBy + '</td>';
+
+                whattoadd += '<td>' + item.logo + '</td>';
+                whattoadd += '<td>' + item.status + '</td>';
+                whattoadd += '<td>' + item.balance + '</td>';
+                whattoadd += '<td>' + item.securityCode + '</td>';
+
+                whattoadd += '<td>' + item.smtpserver + '</td>';
+                whattoadd += '<td>' + item.smtpport + '</td>';
+                whattoadd += '<td>' + item.smtpusername + '</td>';
+                whattoadd += '<td>' + item.deleted + '</td>';
+                whattoadd += '<td>' + item.createdOnUtc + '</td>';
+                whattoadd += '<td>' + item.updatedOnUtc + '</td>';
+                whattoadd += '<td>' + item.currentBalance + '</td>';
+                whattoadd += '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditModal" data-item=item style="width:80px">Edit</button></td>';
+                whattoadd += '<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConfirmDeleteModal" data-item=item style="width:80px">Delete</button></td></tr>';
+            });
+            whattoadd += "<tbody/>";
+            $('#table').append(whattoadd);
+        };
+        req.send();
+    </script>
+</head>
+<body>
+    <table id="table" class="display compact" style="width:100%;margin:10px">
+            <thead>
+                <tr>
+                    <th>Business ID</th><th>Code</th><th>Email</th><th>Name</th>
+
+                    <th>Street</th><th>City</th><th>State</th><th>Zip</th><th>Country</th>
+
+                    <th>Mobile</th><th>Phone</th><th>ContactPerson</th><th>Referred By</th>
+
+                    <th>Logo</th><th>Status</th><th>Balance</th><th>Security Code</th>
+
+                    <th>Smtpserver</th><th>Smtpport</th><th>Smtpusername</th><th>Deleted</th><th>CreatedOnUtc</th><th>UpdatedOnUtc</th><th>Current Balance</th>
+
+                    <th>Edit</th><th>Delete</th>
+                </tr>
+            </thead>
+        </table>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal" style="width:80px">
+            Create
+        </button>
+
+        <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddEditLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" style="width:900px">
+              <div class="modal-content" style="width:900px">
+                <div class="modal-header" style="width:900px">
+                  <h5 class="modal-title" id="exampleModalLabel">Add New Business Agent Data</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"  style="width:800px">
+                    <form id="addForm" style="width:800px">
+                        <!-- <div class="container"> -->
+                        <div class="row">
+                            <div class="col" style="margin:10px">
+
+                                <!-- Business ID, Code, Email, Name -->
+
+                                <div class="form-group">
+                                    <label>Business ID</label>
+                                    <input id="Add_businessId" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Code</label>
+                                    <input id="Add_code" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input id="Add_email" type="email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input id="Add_name" type="text" class="form-control">
+                                </div>
+
+                                <!-- Address -->
+
+                                <div class="form-group">
+                                    <label>Street</label>
+                                    <input id="Add_street" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input id="Add_city" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input id="Add_state" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip</label>
+                                    <input id="Add_zip" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input id="Add_country" type="text" class="form-control">
+                                </div>
+
+                                <!-- Mobile, Phone, ContactPerson, ReferredBy -->
+
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input id="Add_mobile" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input id="Add_phone" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Person</label>
+                                    <input id="Add_contactPerson" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Referred By</label>
+                                    <input id="Add_referredBy" type="text" class="form-control">
+                                </div>
+                            </div> <!–– Column ––>
+
+                            <div class="col" style="margin:10px">
+
+                                <!-- Logo, Status, Balance, SecurityCode -->
+
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <input id="Add_logo" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <input id="Add_status" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Balance</label>
+                                    <input id="Add_balance" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Security Code</label>
+                                    <input id="Add_securityCode" type="text" class="form-control">
+                                </div>
+                                
+                                <!-- Server {Name, Port, Username, Password} -->
+
+                                <div class="form-group">
+                                    <label>Server name</label>
+                                    <input id="Add_smtpserver" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Port</label>
+                                    <input id="Add_smtpport" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Username</label>
+                                    <input id="Add_smtpusername" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Password</label>
+                                    <input id="Add_smtppassword" type="password" class="form-control">
+                                </div>
+
+                                <!-- Deleted, CreatedOnUtc, UpdatedOnUtc, CurrentBalance -->
+
+                                <div class="form-group">
+                                    <label>Deleted?</label>
+                                    <select id="deleted">
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Created On (UTC)</label>
+                                    <input id="Add_createdOnUtc" type="datetime-local" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Updated On (UTC)</label>
+                                    <input id="Add_updatedOnUtc" type="datetime-local" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Current Balance</label>
+                                    <input id="Add_currentBalance" type="number" class="form-control">
+                                </div>
+                            </div> <!–– Column ––>
+                        </div> <!–– Row ––>
+                    <!-- </div> -->
+                        <button id="addButn" type="submit" class="btn btn-primary" onclick="console.log(this);">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="AddEditLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" style="width:900px">
+              <div class="modal-content" style="width:900px">
+                <div class="modal-header" style="width:900px">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Business Agent Data</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"  style="width:800px">
+                    <form id="editForm" style="width:800px">
+                        <!-- <div class="container"> -->
+                        <div class="row">
+                            <div class="col" style="margin:10px">
+
+                                <!-- Business ID, Code, Email, Name -->
+
+                                <div class="form-group">
+                                    <label>Business ID</label>
+                                    <input id="Edit_businessId" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Code</label>
+                                    <input id="Edit_code" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input id="Edit_email" type="email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input id="Edit_name" type="text" class="form-control">
+                                </div>
+
+                                <!-- Address -->
+
+                                <div class="form-group">
+                                    <label>Street</label>
+                                    <input id="Edit_street" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input id="Edit_city" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input id="Edit_state" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip</label>
+                                    <input id="Edit_zip" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input id="Edit_country" type="text" class="form-control">
+                                </div>
+
+                                <!-- Mobile, Phone, ContactPerson, ReferredBy -->
+
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input id="Edit_mobile" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input id="Edit_phone" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Person</label>
+                                    <input id="Edit_contactPerson" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Referred By</label>
+                                    <input id="Edit_referredBy" type="text" class="form-control">
+                                </div>
+                            </div> <!–– Column ––>
+
+                            <div class="col" style="margin:10px">
+
+                                <!-- Logo, Status, Balance, SecurityCode -->
+
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <input id="Edit_logo" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <input id="Edit_status" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Balance</label>
+                                    <input id="Edit_balance" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Security Code</label>
+                                    <input id="Edit_securityCode" type="text" class="form-control">
+                                </div>
+                                
+                                <!-- Server {Name, Port, Username, Password} -->
+
+                                <div class="form-group">
+                                    <label>Server name</label>
+                                    <input id="Edit_smtpserver" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Port</label>
+                                    <input id="Edit_smtpport" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Username</label>
+                                    <input id="Edit_smtpusername" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server Password</label>
+                                    <input id="Edit_smtppassword" type="password" class="form-control">
+                                </div>
+
+                                <!-- Deleted, CreatedOnUtc, UpdatedOnUtc, CurrentBalance -->
+
+                                <div class="form-group">
+                                    <label>Deleted?</label>
+                                    <select id="deleted">
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Created On (UTC)</label>
+                                    <input id="Edit_createdOnUtc" type="datetime-local" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Updated On (UTC)</label>
+                                    <input id="Edit_updatedOnUtc" type="datetime-local" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Current Balance</label>
+                                    <input id="Edit_currentBalance" type="number" class="form-control">
+                                </div>
+                            </div> <!–– Column ––>
+                        </div> <!–– Row ––>
+                    <!-- </div> -->
+                        <button id="editButn" type="submit" class="btn btn-primary" onclick="console.log(this);">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ConfirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Confirm Delete</h5>
+                    </div>
+                    <div class="modal-body">
+                        <label>Are you sure you want to delete this record?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger btn-ok" onclick="">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>

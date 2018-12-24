@@ -1,0 +1,15 @@
+# Dynamic Solvers Bangladesh
+
+[Link to the original repository](bitbucket.org/maacpiash/A4A/)
+
+Accodring to their [website](www.dynamicsolversbd.com), Dynamic Solvers Bangladesh is "a leading customized software development company in Bangladesh… ". Their office is at Mirpur DOHS, Dhaka.
+
+I applied for the post of Full Stack Software Engineer (.NET platform) on 8 December 2018. A high-ranked person working there contacted me via a phone call that night and offered an interview on Skype. My Skype interview went on 9 December 2018 at around 11 pm. During the interview I was asked about my part-time employment at VWY Aerospace (since one of his companies, A4Aero, provided solutions for airline companies). I was also asked basic questions on MVC pattern (was told to give an example of MVC pattern in layman's term) and what was new in .NET (I answered Blazor, but what he was specifically looking for, apparently, was 2FA support for OWIN). Then I was offered an on-site technical interview, to be held on 11 December 2018.
+
+The interview went briefly. I was asked on OOP and design patterns (was told to give an example of singleton pattern in layman's term). I was also asked how two people can work on the same class in two different files (obviously, by `partial` keyword). Then I was given a simple CRUD SPA assignment. But there was a catch: I must use jQuery-AJAX to send requests and receive responses. I was also bound to use modals for 'create', 'update' and 'delete' pages. He said he would provide the SQL schema. He gave me a generous deadline of 4 days, which he later extended to 5.
+
+To be honest, I had zero knowledge of AJAX. So, initially I did the assignment using ASP.NET Core MVC template. This only took about 30 minutes. All I did was use the SQL command given by him to generate a table, connect the database to the project via Visual Studio, use Entity Framework to generate C# classes for the object itself and a DataContext for the object, and finally scaffold the classes. It was a fully functional web app.
+
+But obvously the target of the assignment was to check my "ajax skills" and "layered architecture". So I got rid of all the codes I wrote and started by three different projects to maintain strict distinction of 'M', 'V' and 'C' code files. `A4A.Data` contained the model classes and `A4A.Service` was the REST API that worked as the controller. `A4A.UI`, the view project, is where things went wrong. As I tried using vanilla HTML-CSS-JavaScript with AJAX (I did not have enough knowledge of Angular back then), binding the 'Edit' and 'Delete' buttons with the respective object fields was impossible. As a result, I failed to finish the assignment.
+
+I informed him on Skype on 15 December 2018, the last day of the deadline, that I was unable to finish the assignment, mentioning that the issue was only regarding the UI project and that the two other parts worked perfectly fine. I never got a reply since then.

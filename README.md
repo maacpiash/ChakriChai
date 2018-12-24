@@ -2,7 +2,7 @@
 
 — Friedrich Nietzsche
 
-<h2 align="center">All my rejections live here</h1>
+<h2 align="center">All my rejections live here.</h1>
 
 This repository is a collection of coding tests and assignments that I have attended or completed over the span of 2018.
 

@@ -1,0 +1,23 @@
+{
+    Code: 1,
+    Email: "abc@gmail.com",
+    Name: "ABC",
+    Street: "street",
+    City: "DHK",
+    State: "BD",
+    Zip: "1234",
+    Country: "Bangladesh",
+    Mobile: "01712345678",
+    Phone: "02123456",
+    ContactPerson: "DEF",
+    ReferredBy: "XYZ",
+    Logo: "logo",
+    Status: 5,
+    Balance: 21.12,
+    Smtpusername: "user",
+    Smtppassword: "pass",
+    Deleted: true,
+    CreatedOnUtc: "12/14/2018",
+    UpdatedOnUtc: "12/15/2018",
+    CurrentBalance: 12.12
+}
