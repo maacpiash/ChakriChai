@@ -1,6 +1,6 @@
-> "That which does not kill us makes us stronger."
+> "Either I will find a way, or I will make one."
 
-— Friedrich Nietzsche
+— Sir Philip Sidney, 16th century English poet
 
 <h2 align="center">All my rejections live here.</h1>
 
