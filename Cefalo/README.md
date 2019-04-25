@@ -1,6 +1,6 @@
 # Cefalo
 
-[Link to the original repository](bitbucket.org/maacpiash/cefalog/)
+[Link to the original repository](https://bitbucket.org/maacpiash/Cefalog)
 
 Cefalo is, according to their [website](https://www.cefalo.com/), "a Norway based consulting and offshoring company." They have a branch office in Bangladesh, at Dhanmondi, Dhaka.
 
